@@ -3,7 +3,7 @@
 
 <div class="row">
   <div class="col">
-    <app-pais-input (eventKeyPress)="buscar($event)"></app-pais-input>
+    <app-pais-input (eventKeyPress)="buscar($event)" (eventDevounce)="sugerencias($event)"></app-pais-input>
   </div>
 </div>
 

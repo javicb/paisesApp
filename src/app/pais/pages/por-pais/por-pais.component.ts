@@ -32,4 +32,9 @@ export class PorPaisComponent implements OnInit {
       });
   }
 
+  sugerencias(busqueda: string): void {
+    this.error = false;
+    // TODO: crear sugerencias
+  }
+
 }
