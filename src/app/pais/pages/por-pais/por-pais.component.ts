@@ -13,6 +13,7 @@ export class PorPaisComponent implements OnInit {
   busqueda = '';
   error = false;
   paises: Country[] = [];
+
   constructor(private paisService: PaisService) { }
 
   ngOnInit(): void {
@@ -24,7 +25,6 @@ export class PorPaisComponent implements OnInit {
 
     this.paisService.buscarPais(this.busqueda)
       .subscribe((response) => {
-        console.log(response);
         this.paises = response;
       }, (err) => {
         this.error = true;
