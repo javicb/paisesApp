@@ -5,7 +5,9 @@ import { PaisService } from '../../services/pais.service';
 @Component({
   selector: 'app-por-pais',
   templateUrl: './por-pais.component.html',
-  styles: [
+  styles: [`li {
+    cursor: pointer;
+  }`
   ]
 })
 export class PorPaisComponent implements OnInit {
@@ -13,6 +15,8 @@ export class PorPaisComponent implements OnInit {
   busqueda = '';
   error = false;
   paises: Country[] = [];
+  paisesSugeridos: Country[] = [];
+  mostrarSugerencias = false;
 
   constructor(private paisService: PaisService) { }
 
@@ -22,6 +26,7 @@ export class PorPaisComponent implements OnInit {
   buscar(buscar: string): void {
     this.busqueda = buscar;
     this.error = false;
+    this.mostrarSugerencias = false;
 
     this.paisService.buscarPais(this.busqueda)
       .subscribe((response) => {
@@ -34,7 +39,16 @@ export class PorPaisComponent implements OnInit {
 
   sugerencias(busqueda: string): void {
     this.error = false;
-    // TODO: crear sugerencias
+    this.busqueda = busqueda;
+    this.mostrarSugerencias = true;
+
+    this.paisService.buscarPais(busqueda)
+      .subscribe(paises => this.paisesSugeridos = paises.splice(0, 5),
+        (err) => this.paisesSugeridos = []);
+  }
+
+  buscarSugerido(busqueda: string): void {
+    this.buscar(busqueda);
   }
 
 }
