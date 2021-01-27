@@ -10,16 +10,20 @@ import { PaisService } from '../../services/pais.service';
 export class PorPaisComponent implements OnInit {
 
   busqueda = '';
+  error = false;
   constructor(private paisService: PaisService) { }
 
   ngOnInit(): void {
   }
 
   buscar(): void {
+    this.error = false;
     console.log(this.busqueda);
     this.paisService.buscarPais(this.busqueda)
-      .subscribe(response => {
+      .subscribe((response) => {
         console.log(response);
+      }, (err) => {
+        this.error = true;
       });
   }
 
